@@ -123,6 +123,7 @@ const showNextSetOfData = () => {
     });
 
    // id frpom vis page let i=1;i<id-2         i=global/page   i>id+2   i-- 
+   // id frpom vis page let i=1;i<id-2         i=global/page   i>id+2   i-- 
   
     
   }
