@@ -1,16 +1,31 @@
-button{
-    color:blue;
-    border-radius: 5px;
-    background: transparent;
-     border-color: rgb(136, 136, 250);
-    padding:5px;
-    box-sizing: content-box;
-    margin:2px
-    
+button {
+  color: blue;
+  border-radius: 5px;
+  background: transparent;
+  border-color: rgb(136, 136, 250);
+  padding: 2px;
+  box-sizing: content-box;
+  margin: 5px;
+  border: 10px;
+  text-transform: uppercase;
+  display: flex;
+  flex-wrap: wrap;
 }
-table{
-    background-color: peachpuff;
+
+button:hover {
+  background-color: rgb(123, 123, 247);
+  color: white;
 }
-thead{
-    text-transform: uppercase;
+
+table {
+  background-color: rgb(242, 226, 213);
+  font-size: 20px;
+}
+
+thead {
+  text-transform: uppercase;
+}
+
+tr:nth-child(odd) {
+  background-color: beige;
 }

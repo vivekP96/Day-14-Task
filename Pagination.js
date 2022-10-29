@@ -88,7 +88,7 @@ request.onload = () => {
     //creating td's elements
     const innerTdId = document.createElement("td");
     innerTdId.innerText = id;
-    
+
     const innerTdName = document.createElement("td");
     innerTdName.innerText = name;
     const innerTdEmail = document.createElement("td");
@@ -102,12 +102,12 @@ document.body.style.textAlign = "center";
 const showNextSetOfData = () => {
   if (currPage != global.length / pageLimit - 1) {
     tbodyElement.innerHTML = "";
-     currPage++;
-     VisiblePage=currPage+1;
+    currPage++;
+    VisiblePage = currPage + 1;
     const startIndex = currPage * pageLimit;
     const endIndex = currPage * pageLimit + pageLimit;
-// console.log(VisiblePage);
-// console.log(currPage);
+    // console.log(VisiblePage);
+    // console.log(currPage);
     global.slice(startIndex, endIndex).forEach(({ id, email, name }) => {
       //creating inner tr
       const innerTr = document.createElement("tr");
@@ -122,10 +122,28 @@ const showNextSetOfData = () => {
       tbodyElement.appendChild(innerTr);
     });
 
-   // id frpom vis page let i=1;i<id-2         i=global/page   i>id+2   i-- 
-   // id frpom vis page let i=1;i<id-2         i=global/page   i>id+2   i-- 
-  
-    
+    for (let i = 1; i <= VisiblePage - 2; i++) {
+      if (VisiblePage - 3) {
+        document.getElementById(`btn-${VisiblePage - 3}`).style.display =
+          "none";
+      }
+    }
+    if (VisiblePage - 2 > 0) {
+      document.getElementById(`btn-${VisiblePage - 2}`).style.display =
+        "inline-block";
+    }
+    document.getElementById(`btn-${VisiblePage - 1}`).style.display =
+      "inline-block";
+    document.getElementById(`btn-${VisiblePage}`).style.display =
+      "inline-block";
+    if (VisiblePage + 1 < global.length / pageLimit) {
+      document.getElementById(`btn-${VisiblePage + 1}`).style.display =
+        "inline-block";
+    }
+    if (VisiblePage + 2 < global.length / pageLimit) {
+      document.getElementById(`btn-${VisiblePage + 2}`).style.display =
+        "inline-block";
+    }
   }
 };
 
@@ -134,6 +152,8 @@ nextBtn.addEventListener("click", showNextSetOfData);
 const showPrevSetOfData = () => {
   if (currPage != 0) {
     currPage -= 1;
+    VisiblePage = currPage + 1;
+
     tbodyElement.innerHTML = "";
 
     const startIndex = currPage * pageLimit;
@@ -153,6 +173,25 @@ const showPrevSetOfData = () => {
       tbodyElement.appendChild(innerTr);
     });
 
+    for (let i = global.length / pageLimit; i > VisiblePage + 2; i--) {
+      document.getElementById(`btn-${VisiblePage + 3}`).style.display = "none";
+    }
+    if (VisiblePage + 2 < global.length / pageLimit) {
+      document.getElementById(`btn-${VisiblePage + 2}`).style.display =
+        "inline-block";
+    }
+    document.getElementById(`btn-${VisiblePage + 1}`).style.display =
+      "inline-block";
+    document.getElementById(`btn-${VisiblePage}`).style.display =
+      "inline-block";
+    if (VisiblePage - 1 > 0) {
+      document.getElementById(`btn-${VisiblePage - 1}`).style.display =
+        "inline-block";
+    }
+    if (VisiblePage - 2 > 0) {
+      document.getElementById(`btn-${VisiblePage - 2}`).style.display =
+        "inline-block";
+    }
   }
 };
 prevBtn.addEventListener("click", showPrevSetOfData);
@@ -173,30 +212,27 @@ const ShowFirstPageData = () => {
     innerTr.append(innerTdId, innerTdName, innerTdEmail);
     tbodyElement.appendChild(innerTr);
     // console.log(VisiblePage)
-    if(VisiblePage>2){
-      document.getElementById(`btn-${VisiblePage}`).style.display="none";
+    if (VisiblePage > 2) {
+      document.getElementById(`btn-${VisiblePage}`).style.display = "none";
     }
-    if(VisiblePage-2>0){
-    document.getElementById(`btn-${VisiblePage-2}`).style.display="none";
+    if (VisiblePage - 2 > 0) {
+      document.getElementById(`btn-${VisiblePage - 2}`).style.display = "none";
     }
-    if(VisiblePage-1 > 0){
-    document.getElementById(`btn-${VisiblePage-1}`).style.display="none";
+    if (VisiblePage - 1 > 0) {
+      document.getElementById(`btn-${VisiblePage - 1}`).style.display = "none";
     }
-    if(VisiblePage+1 <global.length/pageLimit)
-    document.getElementById(`btn-${VisiblePage+1}`).style.display="none";
-    
-    if(VisiblePage+2 <=global.length/pageLimit )
-    document.getElementById(`btn-${VisiblePage+2}`).style.display="none";
-    const FinalPage= global.length/pageLimit;
-    document.getElementById(`btn-${FinalPage}`).style.display='none';
-    document.getElementById(`btn-${FinalPage-1}`).style.display='none';
-    document.getElementById(`btn-${FinalPage-2}`).style.display='none';
+    if (VisiblePage + 1 < global.length / pageLimit)
+      document.getElementById(`btn-${VisiblePage + 1}`).style.display = "none";
 
-  
-    document.getElementById(`btn-1`).style.display="inline-block";
-    document.getElementById(`btn-2`).style.display="inline-block";
-    
-    
+    if (VisiblePage + 2 <= global.length / pageLimit)
+      document.getElementById(`btn-${VisiblePage + 2}`).style.display = "none";
+    const FinalPage = global.length / pageLimit;
+    document.getElementById(`btn-${FinalPage}`).style.display = "none";
+    document.getElementById(`btn-${FinalPage - 1}`).style.display = "none";
+    document.getElementById(`btn-${FinalPage - 2}`).style.display = "none";
+
+    document.getElementById(`btn-1`).style.display = "inline-block";
+    document.getElementById(`btn-2`).style.display = "inline-block";
   });
 };
 
@@ -207,7 +243,7 @@ const ShowLastPageData = () => {
   currPage = global.length / pageLimit - 1;
   const startIndex = global.length - pageLimit;
   const endIndex = global.length;
-  const FinalPage= global.length/pageLimit;
+  const FinalPage = global.length / pageLimit;
 
   global.slice(startIndex, endIndex).forEach(({ id, email, name }) => {
     //creating inner tr
@@ -221,30 +257,29 @@ const ShowLastPageData = () => {
     innerTdEmail.innerText = email;
     innerTr.append(innerTdId, innerTdName, innerTdEmail);
     tbodyElement.appendChild(innerTr);
-    if(VisiblePage>2){
-      document.getElementById(`btn-${VisiblePage}`).style.display="none";
+    if (VisiblePage > 2) {
+      document.getElementById(`btn-${VisiblePage}`).style.display = "none";
     }
-    if(VisiblePage-2>0){
-    document.getElementById(`btn-${VisiblePage-2}`).style.display="none";
+    if (VisiblePage - 2 > 0) {
+      document.getElementById(`btn-${VisiblePage - 2}`).style.display = "none";
     }
-    if(VisiblePage-1 > 0){
-    document.getElementById(`btn-${VisiblePage-1}`).style.display="none";
+    if (VisiblePage - 1 > 0) {
+      document.getElementById(`btn-${VisiblePage - 1}`).style.display = "none";
     }
-    if(VisiblePage+1 <global.length/pageLimit)
-    document.getElementById(`btn-${VisiblePage+1}`).style.display="none";
-    
-    if(VisiblePage+2 <=global.length/pageLimit )
-    document.getElementById(`btn-${VisiblePage+2}`).style.display="none";
+    if (VisiblePage + 1 < global.length / pageLimit)
+      document.getElementById(`btn-${VisiblePage + 1}`).style.display = "none";
 
-    document.getElementById(`btn-1`).style.display="none";
-    document.getElementById(`btn-2`).style.display="none";
-    
+    if (VisiblePage + 2 <= global.length / pageLimit)
+      document.getElementById(`btn-${VisiblePage + 2}`).style.display = "none";
 
-    document.getElementById(`btn-${FinalPage}`).style.display='inline-block';
-    document.getElementById(`btn-${FinalPage-1}`).style.display='inline-block';
-    document.getElementById(`btn-${FinalPage-2}`).style.display='inline-block';
+    document.getElementById(`btn-1`).style.display = "none";
+    document.getElementById(`btn-2`).style.display = "none";
 
-    
+    document.getElementById(`btn-${FinalPage}`).style.display = "inline-block";
+    document.getElementById(`btn-${FinalPage - 1}`).style.display =
+      "inline-block";
+    document.getElementById(`btn-${FinalPage - 2}`).style.display =
+      "inline-block";
   });
 };
 
@@ -272,9 +307,9 @@ const CreatePagebuttons = () => {
 };
 const HandlePageNOClick = (id) => {
   tbodyElement.innerHTML = "";
-  currPage = id-1;
-  VisiblePage=id;
-  
+  currPage = id - 1;
+  VisiblePage = id;
+
   const startIndex = currPage * pageLimit;
   const endIndex = currPage * pageLimit + pageLimit;
   global.slice(startIndex, endIndex).forEach(({ id, email, name }) => {
@@ -295,32 +330,28 @@ const HandlePageNOClick = (id) => {
 
   const Nextpgno = id + 1;
   const Finalpgno = id + 2;
-  for (let i = 1; i < id - 2; i++) 
-  {
+  for (let i = 1; i < id - 2; i++) {
     const Prevpgno = `btn-${i}`;
 
     document.getElementById(Prevpgno).style.display = "none";
   }
-  if(id - 1> 0){
-  document.getElementById(`btn-${id - 1}`).style.display = "inline-block";
+  if (id - 1 > 0) {
+    document.getElementById(`btn-${id - 1}`).style.display = "inline-block";
   }
-  if(id-2 >0){
-  document.getElementById(`btn-${id - 2}`).style.display = "inline-block";
+  if (id - 2 > 0) {
+    document.getElementById(`btn-${id - 2}`).style.display = "inline-block";
   }
-  for(let i=global.length/pageLimit;i > id +2;i--){
-    const lastPageNo=`btn-${i}`;
-    document.getElementById(lastPageNo).style.display='none';
+  for (let i = global.length / pageLimit; i > id + 2; i--) {
+    const lastPageNo = `btn-${i}`;
+    document.getElementById(lastPageNo).style.display = "none";
   }
-  if(id - 1> 0){
-  document.getElementById(`btn-${id - 1}`).style.display = "inline-block";
+  if (id - 1 > 0) {
+    document.getElementById(`btn-${id - 1}`).style.display = "inline-block";
   }
-if(Nextpgno <= global.length/pageLimit){
-  document.getElementById(`btn-${Nextpgno}`).style.display = "inline-block";
-}
-  if(Finalpgno < (global.length/pageLimit)-1){
-  document.getElementById(`btn-${Finalpgno}`).style.display = "inline-block";
+  if (Nextpgno <= global.length / pageLimit) {
+    document.getElementById(`btn-${Nextpgno}`).style.display = "inline-block";
   }
-
+  if (Finalpgno < global.length / pageLimit - 1) {
+    document.getElementById(`btn-${Finalpgno}`).style.display = "inline-block";
+  }
 };
-
-
