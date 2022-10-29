@@ -1,0 +1,16 @@
+button{
+    color:blue;
+    border-radius: 5px;
+    background: transparent;
+     border-color: rgb(136, 136, 250);
+    padding:5px;
+    box-sizing: content-box;
+    margin:2px
+    
+}
+table{
+    background-color: peachpuff;
+}
+thead{
+    text-transform: uppercase;
+}
